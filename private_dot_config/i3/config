@@ -1,0 +1,64 @@
+set $mod Mod4
+set $alt Mod1
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+set $fm DP-2
+set $sm DP-0
+
+gaps inner 5px
+gaps outer 5px
+smart_gaps off
+default_border pixel 0
+
+for_window [class=".*"] border pixel 2
+font pango:JetBrainsMono Nerd Font 10
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+exec_always --no-startup-id nitrogen --restore
+exec_always --no-startup-id picom --config ~/.config/i3/picom.conf &
+exec_always --no-startup-id /usr/lib/gsd-xsettings
+exec_always --no-startup-id pkill sxhkd; sxhkd
+
+set $refresh_i3status killall -SIGUSR1 i3status
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+workspace $ws1 output $fm
+workspace $ws2 output $fm
+workspace $ws3 output $fm
+workspace $ws4 output $fm
+workspace $ws5 output $fm
+workspace $ws6 output $sm
+workspace $ws7 output $sm
+workspace $ws8 output $sm
+workspace $ws9 output $sm
+workspace $ws10 output $sm
+
+mode "layout" {
+        bindsym t layout tabbed
+        bindsym s layout toggle split
+        bindsym f floating toggle
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# bindsym $mod+r mode "resize"
+bindsym $mod+Shift+space mode "layout"
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh

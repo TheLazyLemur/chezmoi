@@ -1,0 +1,53 @@
+super + r : shift + {plus, minus}
+	~/.config/i3/scripts/gaps_sizing.sh {--bigger 10,--smaller 10,--zero}
+
+super + r : shift + {1-9}
+	~/.config/i3/scripts/gaps_sizing.sh --bigger {1-9}
+
+super + r : {1-9}
+	~/.config/i3/scripts/gaps_sizing.sh --smaller {1-9}
+
+super + r : 0
+	~/.config/i3/scripts/gaps_sizing.sh --zero
+
+super + r : {l, h}
+        i3-msg {resize shrink width 10 px or 10 ppt, resize grow width 10 px or 10 ppt}
+
+super + r : {k, j}
+        i3-msg {resize grow height 10 px or 10 ppt, resize shrink height 10 px or 10 ppt}
+
+super + shift + s 
+	i3-msg move scratchpad
+
+super + s 
+	i3-msg scratchpad show
+
+super + f
+	i3-msg fullscreen
+
+super + shift + q
+	i3-msg kill
+
+super + q
+	xkill
+
+super + {1-9,0}
+	i3-msg workspace {1-9,10}
+
+super + BackSpace
+	/home/dan/.config/i3/alt-split/alt-split
+
+Print
+	flameshot gui
+
+super + shift + {h,j,k,l}
+	i3-msg move {left,down,up,right}
+
+super + {h,j,k,l}
+	i3-msg focus {left,down,up,right}
+
+control + alt + Delete
+	~/.config/i3/i3lock-multimonitor/lock -i ~/Pictures/skull_dark_patterns_128765_3840x2160.jpg
+
+super + shift + {1-9,0}
+	i3-msg move container to workspace number {1-9,10}
